@@ -8,7 +8,11 @@ GRANT ALL PRIVILEGES ON computer_inventory.* TO 'computer_inventory_manager'@'lo
 
 USE computer_inventory;
 
+-- create tables
 SOURCE create-os-table.sql;
 SOURCE create-dates-table.sql;
 SOURCE create-models-table.sql;
 SOURCE create-devices-table.sql;
+
+-- populate tables
+SOURCE populate-os-table.sql;
