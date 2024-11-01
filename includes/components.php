@@ -16,8 +16,16 @@ function table($title, $headers, $keys, $cols) {
                     foreach($cols as $col) {
                         echo "<tr>";
                         foreach ($keys as $key) {
-                            if($col[$key] != null) {
-                                echo "<td>" . $col[$key] . "</td>";
+                            if ($col[$key] == null) {
+                                echo "<td/>";
+                            } else {
+                                echo "<td>";
+                                if ($key == "url") {
+                                    echo "<a href='" . $col[$key] . "'" . " target='_blank' rel='noopener' >Link</a>";
+                                } else {
+                                    echo $col[$key];
+                                }
+                                echo "</td>";
                             }
                         }
                         echo "</tr>";
