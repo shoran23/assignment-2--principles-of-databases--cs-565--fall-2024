@@ -34,7 +34,13 @@ require("includes/components.php")
             table($title, $headers, $keys, $cols);
         ?>
 
-        
+        <?php
+            $title = "Show the Version Name, (Release Name) and Year Released of all macOS Versions, Listed by Date Released";
+            $headers = ["Version Name (Release Name)", "Year Released"];
+            $keys = ["version_name", "release_name", "released"];
+            $cols = getOsVersionAndRelease();
+            table($title, $headers, $keys, $cols);
+        ?>
 
     </main>
 </body>
