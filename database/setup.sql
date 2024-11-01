@@ -17,3 +17,4 @@ SOURCE create-devices-table.sql;
 -- populate tables
 SOURCE populate-os-table.sql;
 SOURCE populate-dates-table.sql;
+SOURCE populate-models-table.sql;

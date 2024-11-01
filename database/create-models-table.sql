@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS models (
     last_supported VARCHAR(8) NOT NULL,
     FOREIGN KEY (last_supported) REFERENCES operating_systems(darwin),
 
-    PRIMARY KEY(part_number)
+    PRIMARY KEY(model_id)
 );
