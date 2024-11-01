@@ -37,12 +37,18 @@ function getOperatingSystems(): array {
     }
 }
 
+
+function modifyVersionCol($col) {
+    $colMod["name"] = $col["version_name"] . " (" . $col["release_name"] . ")";
+    $colMod["released"] = $col["released"];
+    return $colMod;
+}
 function getOsVersionAndRelease(): array {
     try {
         $db = prepareDb();
         $statement = $db->prepare("SELECT version_name, release_name, released FROM operating_systems NATURAL JOIN dates ORDER BY released");
         $statement->execute();
-        return $statement->fetchAll();
+        return array_map("modifyVersionCol", $statement->fetchAll());
     }
     catch (PDOException $e) {
         echo $e->getMessage();
