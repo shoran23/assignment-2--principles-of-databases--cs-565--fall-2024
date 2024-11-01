@@ -9,5 +9,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <header>
+        <h1>Apple Macintosh Computer Inventory</h1>
+    </header>
+    <main>
+
+    </main>
 </body>
 </html>
