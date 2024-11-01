@@ -16,7 +16,9 @@ function table($title, $headers, $keys, $cols) {
                     foreach($cols as $col) {
                         echo "<tr>";
                         foreach ($keys as $key) {
-                            echo "<td>" . $col[$key] . "</td>";
+                            if($col[$key] != null) {
+                                echo "<td>" . $col[$key] . "</td>";
+                            }
                         }
                         echo "</tr>";
                     }
