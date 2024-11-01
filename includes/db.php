@@ -23,3 +23,16 @@ function getNumberOfVersions(): int {
         exit;
     }
 }
+
+function getOperatingSystems(): array {
+    try {
+        $db = prepareDb();
+        $statement = $db->prepare("SELECT version_name, release_name, darwin, announced, released, last_release FROM operating_systems NATURAL JOIN dates");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+        exit;
+    }
+}
