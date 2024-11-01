@@ -1,3 +1,7 @@
+<?php
+require("includes/db.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +17,14 @@
         <h1>Apple Macintosh Computer Inventory</h1>
     </header>
     <main>
-
+        <section>
+            <h2>How Many Versions of macOS Have Been Released?</h2>
+            <div>
+                <?php
+                    echo "<p>There have been <b>" . getNumberOfVersions() . "</b> versions of macOS released thus far.</p>";
+                ?>
+            </div>
+        </section>
     </main>
 </body>
 </html>
