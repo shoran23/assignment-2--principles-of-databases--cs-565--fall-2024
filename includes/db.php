@@ -55,3 +55,16 @@ function getOsVersionAndRelease(): array {
         exit;
     }
 }
+
+function getCurrentInventory(): array {
+    try {
+        $db = prepareDb();
+        $statement = $db->prepare("SELECT model, model_id, model_number, part_number, serial_number, darwin, last_supported, url FROM devices NATURAL JOIN models");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+        exit;
+    }
+}

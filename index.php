@@ -45,7 +45,9 @@ require("includes/components.php")
         <?php
             $title = "Show the Current Inventory (Excluding Comments)";
             $header = ["Model Name", "Model Identifier", "Model Number", "Part Number", "Serial Number", "Darwin OS Number", "Latest Supporting Darwin OS Number", "URL"];
-            //$key = {}
+            $keys = ["model", "model_id", "model_number", "part_number", "serial_number", "darwin", "last_supported", "url"];
+            $cols = getCurrentInventory();
+            table($title, $header, $keys, $cols);
         ?>
 
     </main>
