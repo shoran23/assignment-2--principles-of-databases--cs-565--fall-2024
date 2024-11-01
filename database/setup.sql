@@ -18,3 +18,4 @@ SOURCE create-devices-table.sql;
 SOURCE populate-os-table.sql;
 SOURCE populate-dates-table.sql;
 SOURCE populate-models-table.sql;
+SOURCE populate-devices-table.sql;
