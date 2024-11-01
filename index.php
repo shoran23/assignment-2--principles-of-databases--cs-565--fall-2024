@@ -1,5 +1,6 @@
 <?php
 require("includes/db.php");
+require("includes/components.php")
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +26,10 @@ require("includes/db.php");
                 ?>
             </div>
         </section>
+        <?php
+            $title = "Show the Version Name, Release Name, Official Darwin OS Number, Date Announced, Date Released, and Date of Latest Release of All macOS Versions, Listed by Date Order";
+            table($title);
+        ?>
     </main>
 </body>
 </html>
