@@ -50,6 +50,14 @@ require("includes/components.php")
             table($title, $header, $keys, $cols);
         ?>
 
+<!--        --><?php
+//            $title = "Show the Model, Installed/Original OS, and the Last Supported OS For the Current Inventory";
+//            $headers = ["Model", "	Installed/Original OS", "Last Supported OS"];
+//            $keys = ["model", "device_release", "model_release"];
+//            $cols = getCurrentInventoryOs();
+//            table($title, $headers, $keys, $cols);
+//        ?>
+
     </main>
 </body>
 </html>

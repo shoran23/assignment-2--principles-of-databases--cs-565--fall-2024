@@ -27,7 +27,7 @@ function getNumberOfVersions(): int {
 function getOperatingSystems(): array {
     try {
         $db = prepareDb();
-        $statement = $db->prepare("SELECT version_name, release_name, darwin, announced, released, last_release FROM operating_systems NATURAL JOIN dates ORDER BY announced");
+        $statement = $db->prepare("SELECT version_name, release_name, darwin, announced, released, last_darwin FROM operating_systems NATURAL JOIN dates ORDER BY announced");
         $statement->execute();
         return $statement->fetchAll();
     }
@@ -59,7 +59,7 @@ function getOsVersionAndRelease(): array {
 function getCurrentInventory(): array {
     try {
         $db = prepareDb();
-        $statement = $db->prepare("SELECT model, model_id, model_number, part_number, serial_number, darwin, last_supported, url FROM devices NATURAL JOIN models");
+        $statement = $db->prepare("SELECT model, model_id, model_number, part_number, serial_number, darwin, last_darwin, url FROM devices NATURAL JOIN models");
         $statement->execute();
         return $statement->fetchAll();
     }
