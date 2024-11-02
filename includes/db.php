@@ -68,3 +68,24 @@ function getCurrentInventory(): array {
         exit;
     }
 }
+
+function getCurrentInventoryOs(): array {
+    try {
+        $db = prepareDb();
+        $statement = $db->prepare("DROP VIEW IF EXISTS DeviceReleaseNames");
+        $statement->execute();
+        $statement = $db->prepare("CREATE VIEW DeviceReleaseNames AS SELECT model, release_name as device_release FROM operating_system CROSS JOIN devices USING(darwin) CROSS JOIN models USING(model_id)");
+        $statement->execute();
+        $statement = $db->prepare("DROP VIEW IF EXISTS ModelsLastSupportReleaseNames");
+        $statement->execute();
+        $statement = $db->prepare("CREATE VIEW ModelsLastSupportReleaseNames AS SELECT model, release_name as model_release FROM operating_systems CROSS JOIN model USING(darwin)");
+        $statement->execute();
+        $statement = $db->prepare("SELECT model, device_release, model_release FROM DeviceReleaseNames CROSS JOIN ModelsLastSupportReleaseNames USING(model)");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+        exit;
+    }
+}

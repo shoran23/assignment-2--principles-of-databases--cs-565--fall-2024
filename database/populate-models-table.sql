@@ -1,5 +1,5 @@
 INSERT INTO models
-    (model, model_id, model_number, part_number, last_supported, url)
+    (model, model_id, model_number, part_number, darwin, url)
 VALUES
     ("MacBook (Retina, 12-inch, Early 2015)", "MacBook8,1", "A1534", "Z0RN00003", "20", "https://support.apple.com/en-us/112442"),
     ("MacBook Pro (15-inch, 2.53GHz, Mid 2009)", "MacBookPro5,4",  NULL, "MC118LL/A",  "15", "https://support.apple.com/en-us/112624"),
