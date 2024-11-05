@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS models (
     model_number VARCHAR(8) DEFAULT NULL,
     part_number VARCHAR(24) NOT NULL,
     url VARCHAR(64) NOT NULL,
-    last_darwin VARCHAR(8) NOT NULL,
-    FOREIGN KEY (last_darwin) REFERENCES operating_systems(darwin),
+    darwin VARCHAR(8) NOT NULL,
+    FOREIGN KEY (darwin) REFERENCES operating_systems(darwin),
 
     PRIMARY KEY(model_id)
 );

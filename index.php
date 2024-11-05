@@ -29,7 +29,7 @@ require("includes/components.php")
         <?php
             $title = "Show the Version Name, Release Name, Official Darwin OS Number, Date Announced, Date Released, and Date of Latest Release of All macOS Versions, Listed by Date Order";
             $headers = ["Version Name", "Release Name", "Official Darwin OS Number", "Date Announced", "Date Released", "Date of Latest Release"];
-            $keys = ["version_name", "release_name", "darwin", "announced", "released", "last_release"];
+            $keys = ["version_name", "release_name", "darwin", "announced", "released", "darwin"];
             $cols = getOperatingSystems();
             table($title, $headers, $keys, $cols);
         ?>
@@ -45,18 +45,18 @@ require("includes/components.php")
         <?php
             $title = "Show the Current Inventory (Excluding Comments)";
             $header = ["Model Name", "Model Identifier", "Model Number", "Part Number", "Serial Number", "Darwin OS Number", "Latest Supporting Darwin OS Number", "URL"];
-            $keys = ["model", "model_id", "model_number", "part_number", "serial_number", "darwin", "last_supported", "url"];
+            $keys = ["model", "model_id", "model_number", "part_number", "serial_number", "current_darwin", "last_darwin", "url"];
             $cols = getCurrentInventory();
             table($title, $header, $keys, $cols);
         ?>
 
-<!--        --><?php
-//            $title = "Show the Model, Installed/Original OS, and the Last Supported OS For the Current Inventory";
-//            $headers = ["Model", "	Installed/Original OS", "Last Supported OS"];
-//            $keys = ["model", "device_release", "model_release"];
-//            $cols = getCurrentInventoryOs();
-//            table($title, $headers, $keys, $cols);
-//        ?>
+        <?php
+            $title = "Show the Model, Installed/Original OS, and the Last Supported OS For the Current Inventory";
+            $headers = ["Model", "	Installed/Original OS", "Last Supported OS"];
+            $keys = ["model", "device_release", "model_release"];
+            $cols = getCurrentInventoryOs();
+            table($title, $headers, $keys, $cols);
+        ?>
 
     </main>
 </body>

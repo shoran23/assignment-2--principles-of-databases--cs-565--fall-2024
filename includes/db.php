@@ -27,7 +27,7 @@ function getNumberOfVersions(): int {
 function getOperatingSystems(): array {
     try {
         $db = prepareDb();
-        $statement = $db->prepare("SELECT version_name, release_name, darwin, announced, released, last_darwin FROM operating_systems NATURAL JOIN dates ORDER BY announced");
+        $statement = $db->prepare("SELECT version_name, release_name, darwin, announced, released, last_release FROM operating_systems NATURAL JOIN dates ORDER BY announced");
         $statement->execute();
         return $statement->fetchAll();
     }
@@ -37,12 +37,12 @@ function getOperatingSystems(): array {
     }
 }
 
-
 function modifyVersionCol($col) {
     $colMod["name"] = $col["version_name"] . " (" . $col["release_name"] . ")";
     $colMod["released"] = $col["released"];
     return $colMod;
 }
+
 function getOsVersionAndRelease(): array {
     try {
         $db = prepareDb();
@@ -59,7 +59,9 @@ function getOsVersionAndRelease(): array {
 function getCurrentInventory(): array {
     try {
         $db = prepareDb();
-        $statement = $db->prepare("SELECT model, model_id, model_number, part_number, serial_number, darwin, last_darwin, url FROM devices NATURAL JOIN models");
+        $statement = $db->prepare(
+            "SELECT model, model_id, model_number, part_number, serial_number, devices.darwin AS current_darwin, models.darwin AS last_darwin, url FROM devices CROSS JOIN models USING(model_id)"
+        );
         $statement->execute();
         return $statement->fetchAll();
     }
@@ -69,23 +71,24 @@ function getCurrentInventory(): array {
     }
 }
 
-function getCurrentInventoryOs(): array {
-    try {
-        $db = prepareDb();
-        $statement = $db->prepare("DROP VIEW IF EXISTS DeviceReleaseNames");
-        $statement->execute();
-        $statement = $db->prepare("CREATE VIEW DeviceReleaseNames AS SELECT model, release_name as device_release FROM operating_system CROSS JOIN devices USING(darwin) CROSS JOIN models USING(model_id)");
-        $statement->execute();
-        $statement = $db->prepare("DROP VIEW IF EXISTS ModelsLastSupportReleaseNames");
-        $statement->execute();
-        $statement = $db->prepare("CREATE VIEW ModelsLastSupportReleaseNames AS SELECT model, release_name as model_release FROM operating_systems CROSS JOIN model USING(darwin)");
-        $statement->execute();
-        $statement = $db->prepare("SELECT model, device_release, model_release FROM DeviceReleaseNames CROSS JOIN ModelsLastSupportReleaseNames USING(model)");
-        $statement->execute();
-        return $statement->fetchAll();
-    }
-    catch (PDOException $e) {
-        echo $e->getMessage();
-        exit;
-    }
-}
+//function getCurrentInventoryOs(): array {
+//    try {
+//        $db = prepareDb();
+//        $statement = $db->prepare("DROP VIEW IF EXISTS DeviceReleaseNames");
+//        $statement->execute();
+//        $statement = $db->prepare("CREATE VIEW DeviceReleaseNames AS SELECT model, release_name as device_release FROM operating_systems CROSS JOIN devices USING(darwin) CROSS JOIN models USING(model_id)");
+//        $statement->execute();
+//        $statement = $db->prepare("DROP VIEW IF EXISTS ModelsLastSupportReleaseNames");
+//        $statement->execute();
+//        $statement = $db->prepare("CREATE VIEW ModelsLastSupportReleaseNames AS SELECT model, release_name as model_release FROM operating_systems CROSS JOIN models USING(darwin)");
+//        $statement->execute();
+//        $statement = $db->prepare("SELECT model, device_release, model_release FROM DeviceReleaseNames CROSS JOIN ModelsLastSupportReleaseNames USING(model)");
+//        $statement->execute();
+//        return $statement->fetchAll();
+//    }
+//    catch (PDOException $e) {
+//        echo $e->getMessage();
+//        exit;
+//    }
+//}
+
