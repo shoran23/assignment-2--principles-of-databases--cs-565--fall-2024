@@ -37,7 +37,7 @@ function getOperatingSystems(): array {
     }
 }
 
-function modifyVersionCol($col) {
+function modifyVersionCol($col): array {
     $colMod["name"] = $col["version_name"] . " (" . $col["release_name"] . ")";
     $colMod["released"] = substr($col["released"], 0, 4);
     return $colMod;
@@ -71,7 +71,7 @@ function getCurrentInventory(): array {
     }
 }
 
-// reformat this request
+// reformat this request for code neatest
 function getCurrentInventoryOs(): array {
     try {
         $db = prepareDb();

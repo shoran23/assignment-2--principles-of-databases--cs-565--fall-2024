@@ -1,6 +1,6 @@
 <?php
 require("includes/db.php");
-require("includes/components.php")
+require("includes/components.php");
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ require("includes/components.php")
             $headers = ["Version Name", "Release Name", "Official Darwin OS Number", "Date Announced", "Date Released", "Date of Latest Release"];
             $keys = ["version_name", "release_name", "darwin", "announced", "released", "last_release"];
             $cols = getOperatingSystems();
-            table($title, $headers, $keys, $cols);
+            createTable($title, $headers, $keys, $cols);
         ?>
 
         <?php
@@ -39,7 +39,7 @@ require("includes/components.php")
             $headers = ["Version Name (Release Name)", "Year Released"];
             $keys = ["name", "released"];
             $cols = getOsVersionAndRelease();
-            table($title, $headers, $keys, $cols);
+            createTable($title, $headers, $keys, $cols);
         ?>
 
         <?php
@@ -47,7 +47,7 @@ require("includes/components.php")
             $header = ["Model Name", "Model Identifier", "Model Number", "Part Number", "Serial Number", "Darwin OS Number", "Latest Supporting Darwin OS Number", "URL"];
             $keys = ["model", "model_id", "model_number", "part_number", "serial_number", "current_darwin", "last_darwin", "url"];
             $cols = getCurrentInventory();
-            table($title, $header, $keys, $cols);
+            createTable($title, $header, $keys, $cols);
         ?>
 
         <?php
@@ -55,7 +55,7 @@ require("includes/components.php")
             $headers = ["Model", "	Installed/Original OS", "Last Supported OS"];
             $keys = ["model", "device_release", "model_release"];
             $cols = getCurrentInventoryOs();
-            table($title, $headers, $keys, $cols);
+            createTable($title, $headers, $keys, $cols);
         ?>
     </main>
 </body>

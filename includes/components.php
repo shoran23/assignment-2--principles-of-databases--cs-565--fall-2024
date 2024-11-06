@@ -1,7 +1,7 @@
 <?php
 
 // need to refactor for neatness
-function table($title, $headers, $keys, $cols) {
+function createTable($title, $headers, $keys, $cols): void {
     echo "<section>";
     echo "<h2>" . $title . "</h2>";
     echo    "<div>";
@@ -9,27 +9,27 @@ function table($title, $headers, $keys, $cols) {
     echo            "<thead>";
     echo                "<tr>";
                         foreach ($headers as $header) {
-                            echo "<th>" . $header . "</th>";
+    echo                    "<th>" . $header . "</th>";
                         }
     echo                "</tr>";
     echo            "</thead>";
     echo            "<tbody>";
                     foreach($cols as $col) {
-                        echo "<tr>";
+    echo                "<tr>";
                         foreach ($keys as $key) {
                             if ($col[$key] == null) {
-                                echo "<td/>";
+    echo                        "<td/>";
                             } else {
-                                echo "<td>";
+    echo                        "<td>";
                                 if ($key == "url") {
-                                    echo "<a href='" . $col[$key] . "'" . " target='_blank' rel='noopener' >Link</a>";
+    echo                            "<a href='" . $col[$key] . "'" . " target='_blank' rel='noopener' >Link</a>";
                                 } else {
-                                    echo $col[$key];
+    echo                            $col[$key];
                                 }
-                                echo "</td>";
+    echo                        "</td>";
                             }
                         }
-                        echo "</tr>";
+    echo                "</tr>";
                     }
     echo            "</tbody>";
     echo        "</table>";
