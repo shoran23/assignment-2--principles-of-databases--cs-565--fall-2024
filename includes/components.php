@@ -1,6 +1,5 @@
 <?php
 
-// need to refactor for neatness
 function createTable($title, $headers, $keys, $cols): void {
     echo "<section>";
     echo "<h2>" . $title . "</h2>";
