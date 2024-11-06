@@ -29,7 +29,7 @@ require("includes/components.php")
         <?php
             $title = "Show the Version Name, Release Name, Official Darwin OS Number, Date Announced, Date Released, and Date of Latest Release of All macOS Versions, Listed by Date Order";
             $headers = ["Version Name", "Release Name", "Official Darwin OS Number", "Date Announced", "Date Released", "Date of Latest Release"];
-            $keys = ["version_name", "release_name", "darwin", "announced", "released", "darwin"];
+            $keys = ["version_name", "release_name", "darwin", "announced", "released", "last_release"];
             $cols = getOperatingSystems();
             table($title, $headers, $keys, $cols);
         ?>

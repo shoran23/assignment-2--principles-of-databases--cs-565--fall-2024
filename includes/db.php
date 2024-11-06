@@ -39,7 +39,7 @@ function getOperatingSystems(): array {
 
 function modifyVersionCol($col) {
     $colMod["name"] = $col["version_name"] . " (" . $col["release_name"] . ")";
-    $colMod["released"] = $col["released"];
+    $colMod["released"] = substr($col["released"], 0, 4);
     return $colMod;
 }
 
@@ -71,24 +71,28 @@ function getCurrentInventory(): array {
     }
 }
 
-//function getCurrentInventoryOs(): array {
-//    try {
-//        $db = prepareDb();
-//        $statement = $db->prepare("DROP VIEW IF EXISTS DeviceReleaseNames");
-//        $statement->execute();
-//        $statement = $db->prepare("CREATE VIEW DeviceReleaseNames AS SELECT model, release_name as device_release FROM operating_systems CROSS JOIN devices USING(darwin) CROSS JOIN models USING(model_id)");
-//        $statement->execute();
-//        $statement = $db->prepare("DROP VIEW IF EXISTS ModelsLastSupportReleaseNames");
-//        $statement->execute();
-//        $statement = $db->prepare("CREATE VIEW ModelsLastSupportReleaseNames AS SELECT model, release_name as model_release FROM operating_systems CROSS JOIN models USING(darwin)");
-//        $statement->execute();
-//        $statement = $db->prepare("SELECT model, device_release, model_release FROM DeviceReleaseNames CROSS JOIN ModelsLastSupportReleaseNames USING(model)");
-//        $statement->execute();
-//        return $statement->fetchAll();
-//    }
-//    catch (PDOException $e) {
-//        echo $e->getMessage();
-//        exit;
-//    }
-//}
+// reformat this request
+function getCurrentInventoryOs(): array {
+    try {
+        $db = prepareDb();
+        $statement = $db->prepare(
+    "SELECT model, model_release, device_release
+            FROM (
+                (SELECT model, release_name as model_release
+                FROM models
+                CROSS JOIN operating_systems USING(darwin)) AS model_releases
+                CROSS JOIN
+                    (SELECT model, release_name as device_release
+                    FROM operating_systems
+                    CROSS JOIN devices USING(darwin)
+                    CROSS JOIN models USING(model_id)) AS device_releases
+                USING(model))");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+        exit;
+    }
+}
 
