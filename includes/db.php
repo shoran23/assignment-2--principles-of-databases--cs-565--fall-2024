@@ -95,4 +95,3 @@ function getCurrentInventoryOs(): array {
         exit;
     }
 }
-

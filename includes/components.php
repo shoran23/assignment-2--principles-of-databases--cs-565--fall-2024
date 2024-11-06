@@ -1,8 +1,9 @@
 <?php
 
+// need to refactor for neatness
 function table($title, $headers, $keys, $cols) {
     echo "<section>";
-    echo    "<h2>" . $title . "</h2>";
+    echo "<h2>" . $title . "</h2>";
     echo    "<div>";
     echo        "<table>";
     echo            "<thead>";

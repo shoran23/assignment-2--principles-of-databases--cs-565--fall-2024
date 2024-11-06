@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS dates (
-    announced DATE NOT NULL,
-    released DATE DEFAULT NULL,
-    last_release DATE DEFAULT NULL,
-    darwin VARCHAR(8) NOT NULL,
-    FOREIGN KEY (darwin) REFERENCES operating_systems(darwin),
+  announced     DATE          NOT NULL,
+  released      DATE          DEFAULT NULL,
+  last_release  DATE          DEFAULT NULL,
+  darwin        VARCHAR(8)    NOT NULL,
 
-    PRIMARY KEY(announced)
+  FOREIGN       KEY (darwin)  REFERENCES operating_systems(darwin),
+  PRIMARY       KEY(announced)
 );
